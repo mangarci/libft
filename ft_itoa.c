@@ -6,18 +6,24 @@
 /*   By: mangarci <mangarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 14:28:10 by mangarci          #+#    #+#             */
-/*   Updated: 2021/11/08 17:04:54 by mangarci         ###   ########.fr       */
+/*   Updated: 2021/11/08 17:34:51 by mangarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_fill_sign(size_t n, int len, char *str)
+int	nbr_sign(int n, int len)
 {
+	int	nbr;
+
 	if (n < 0)
-		ft_fill(-n, len - 1, str);
+	{
+		nbr = -n;
+		len++;
+	}
 	else
-		ft_fill(n, len - 1, str);
+		nbr = n;
+	return (nbr);
 }
 
 static void	ft_fill(size_t n, int i, char *str)
@@ -25,6 +31,14 @@ static void	ft_fill(size_t n, int i, char *str)
 	if (n >= 10)
 		ft_fill(n / 10, i - 1, str);
 	str[i] = n % 10 + '0';
+}
+
+static void	ft_fill_sign(size_t n, int len, char *str)
+{
+	if (n < 0)
+		ft_fill(-n, len - 1, str);
+	else
+		ft_fill(n, len - 1, str);
 }
 
 char	*ft_itoa(int n)
@@ -50,18 +64,4 @@ char	*ft_itoa(int n)
 	if (n < 0)
 		str[0] = '-';
 	return (str);
-}
-
-int	nbr_sign(int n, int len)
-{
-	int	nbr;
-
-	if (n < 0)
-	{
-		nbr = -n;
-		len++;
-	}
-	else
-		nbr = n;
-	return (nbr);
 }
